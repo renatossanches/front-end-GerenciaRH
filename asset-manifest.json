@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/front-end-GerenciaRH/static/css/main.e6c13ad2.css",
+    "main.js": "/front-end-GerenciaRH/static/js/main.4d7424a3.js",
+    "static/js/453.80efc53e.chunk.js": "/front-end-GerenciaRH/static/js/453.80efc53e.chunk.js",
+    "index.html": "/front-end-GerenciaRH/index.html",
+    "main.e6c13ad2.css.map": "/front-end-GerenciaRH/static/css/main.e6c13ad2.css.map",
+    "main.4d7424a3.js.map": "/front-end-GerenciaRH/static/js/main.4d7424a3.js.map",
+    "453.80efc53e.chunk.js.map": "/front-end-GerenciaRH/static/js/453.80efc53e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.4d7424a3.js"
+  ]
+}
