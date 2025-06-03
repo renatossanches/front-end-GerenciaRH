@@ -1,3 +1,4 @@
+import CreateDepartment from "../FormCreateDepartment";
 import CreateEnterprise from "../FormCreateEnterprise";
 import Login from "../FormLogin";
 import { Link } from "react-router-dom";
@@ -16,6 +17,7 @@ const Header = () => {
                 <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> 
                     <li><Login/></li>
                     <li><CreateEnterprise/></li>
+                    <li><CreateDepartment/></li>
 
                 </ul> <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"> 
                     <input type="search" classNam="form-control" placeholder="Search..." aria-label="Search"/> 
