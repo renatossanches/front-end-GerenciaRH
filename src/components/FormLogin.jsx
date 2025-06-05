@@ -8,18 +8,17 @@ function Login(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
         const userLoginRequestDto = {
             nickname,
             password
         }
-        const response = await PostLogin(userLoginRequestDto);
-        
-        /*
-        const decoded = jwtDecode(response.token);
-        console.log(decoded.role);
-        */
-
+        try {
+          await PostLogin(userLoginRequestDto);
+          window.location.reload();  
+      } catch (error) {
+          console.error("Erro no login:", error);
+      }
+      
     }
     return (
         <div>
@@ -38,8 +37,8 @@ function Login(props) {
                 </button>
               </div>
               <div className="modal-body">
-                <form>
-                  <div className="form-group">
+              <form onSubmit={handleSubmit}>
+              <div className="form-group">
                     <label htmlFor="nickname" className="col-form-label">Nickname:</label>
                     <input type="text" className="form-control" id="nickname" onChange={(e) => setNickname(e.target.value)}/>
                   </div>
@@ -47,11 +46,11 @@ function Login(props) {
                     <label htmlFor="password" className="col-form-label">Password:</label>
                     <input type="password" className="form-control" id="password" onChange={(e) => setPassword(e.target.value)}/>
                   </div>
-                </form>
-              </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Save changes</button>
+                <button type="submit" className="btn btn-primary">Save changes</button>
+              </div>
+              </form>
               </div>
             </div>
           </div>

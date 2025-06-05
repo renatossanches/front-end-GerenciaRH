@@ -31,17 +31,17 @@ const Header = () => {
 
                     <div className="dropdown text-end">
                             <Link to="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://raw.githubusercontent.com/renatossanches/front-end-GerenciaRH/refs/heads/main/public/userdefault.webp" alt="mdo" width="32" height="32" className="rounded-circle" />
-                                {user ? <p>{user.name}</p> : <p>Loading...</p>}                            
-                                </Link>
+                                <img src="https://raw.githubusercontent.com/renatossanches/front-end-GerenciaRH/refs/heads/main/public/userdefault.webp" alt="mdo" width="32" height="32" className="rounded-circle" />                  
+                                {user ? <p>{user.name}</p> : <p></p>}    
 
+                                </Link>
                             <ul className="dropdown-menu text-small" >
                                 <Link to="" className="dropdown-item">Settings</Link> 
                                 <Link to="/profile" className="dropdown-item">Profile</Link> 
                                 <Link to="/" className="dropdown-divider"></Link>
                                 <Link to="/home" 
                                 
-                                onClick={() => localStorage.removeItem('authToken')} className="dropdown-item">Sign out</Link>   
+                                onClick={() => {localStorage.removeItem('authToken'); setUser(null); window.location.reload();}} className="dropdown-item">Sign out</Link>   
                             </ul> 
                     </div> 
             </div> 
