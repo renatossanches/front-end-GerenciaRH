@@ -2,28 +2,25 @@ import { GetReturnPayload } from "../routers/private/requests/get/GetReturnPaylo
 import { useState, useEffect } from "react";
 import { PutUpdateUser } from "../routers/private/requests/put/PutUpdateUser";
 import { useNavigate } from 'react-router-dom';
+import { useUser } from "./contexts/UserContextGlobal";
 function AlterationOfPersonData(){
     const [name, setName] = useState('');
     const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
+    const {getUser, setUser} = useUser();
 
     useEffect(() => {
-        async function fetchUser() {
-          const user = await GetReturnPayload(); 
-            if(user === undefined || user === null){ 
-                navigate('/home');
-                return ;
-            }
-
-            setName(user.name);
-            setNickname(user.nickname);
-            setEmail(user.email);
-          
-    }
-
-        fetchUser();
-      }, []);
+        const user = getUser();
+        if (!user) { 
+            navigate('/home');
+            return;
+        }
+    
+        setName(user.name);
+        setNickname(user.nickname);
+        setEmail(user.email);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,9 +30,7 @@ function AlterationOfPersonData(){
             nickname,
             email,
         };
-        console.log("Nickname original:", nickname);
-
-
+        setUser(user);
         PutUpdateUser(user);
     }
     
