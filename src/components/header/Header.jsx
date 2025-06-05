@@ -1,3 +1,4 @@
+import { useUser } from "../contexts/UserContextGlobal";
 import CreateDepartment from "../FormCreateDepartment";
 import CreateEnterprise from "../FormCreateEnterprise";
 import CreateUser from "../FormCreateUser";
@@ -5,6 +6,8 @@ import Login from "../FormLogin";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+    const {getUser, setUser}= useUser();
+    const user = getUser();
     return(
     <div>
     <header className="p-3 mb-3 border-bottom"> 
@@ -20,6 +23,7 @@ const Header = () => {
                     <li><CreateEnterprise/></li>
                     <li><CreateDepartment/></li>
                     <li><CreateUser/></li>
+                    <li><Link to="/tools" className="nav-link px-2 link-body-emphasis">Tools</Link></li>
                 
                 </ul> <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"> 
                     <input type="search" classNam="form-control" placeholder="Search..." aria-label="Search"/> 
@@ -28,7 +32,8 @@ const Header = () => {
                     <div className="dropdown text-end">
                             <Link to="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://raw.githubusercontent.com/renatossanches/front-end-GerenciaRH/refs/heads/main/public/userdefault.webp" alt="mdo" width="32" height="32" className="rounded-circle" />
-                            </Link>
+                                {user ? <p>{user.name}</p> : <p>Loading...</p>}                            
+                                </Link>
 
                             <ul className="dropdown-menu text-small" >
                                 <Link to="" className="dropdown-item">Settings</Link> 
