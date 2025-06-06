@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { GetReturnPayload } from "../../routers/private/requests/get/GetReturnPayload";
+import { GetReturnPayload } from "../routers/private/requests/get/GetReturnPayload";
 
 const UserContext = createContext();
 

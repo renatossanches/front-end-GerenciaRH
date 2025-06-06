@@ -1,28 +1,21 @@
-import { GetReturnPayload } from "../routers/private/requests/get/GetReturnPayload";
 import { useState, useEffect } from "react";
 import { PutUpdateUser } from "../routers/private/requests/put/PutUpdateUser";
-import { useNavigate } from 'react-router-dom';
-import { useUser } from "./contexts/UserContextGlobal";
+import { useUser } from "../contexts/UserContextGlobal";
 function AlterationOfPersonData(){
     const [name, setName] = useState('');
     const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
-    const navigate = useNavigate();
     const {getUser, setUser} = useUser();
 
     useEffect(() => {
         const user = getUser();
-        if (!user) { 
-            navigate('/home');
-            return;
-        }
     
         setName(user.name);
         setNickname(user.nickname);
         setEmail(user.email);
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const user = {
@@ -30,8 +23,19 @@ function AlterationOfPersonData(){
             nickname,
             email,
         };
-        setUser(user);
-        PutUpdateUser(user);
+
+        
+               
+        const status = await PutUpdateUser(user);
+        console.log(status);
+        if(status === 200){
+            setUser(user);
+        }
+        else{
+            return;
+        }
+
+
     }
     
     
