@@ -1,4 +1,5 @@
 import { useUser } from "../../contexts/UserContextGlobal";
+import { PutUdateToken } from "../../routers/private/requests/put/PutUpdateToken";
 import CreateDepartment from "../FormCreateDepartment";
 import CreateEnterprise from "../FormCreateEnterprise";
 import CreateUser from "../FormCreateUser";
@@ -8,6 +9,13 @@ import { Link } from "react-router-dom";
 const Header = () => {
     const {getUser, setUser}= useUser();
     const user = getUser();
+
+    const handleLogout = () => {
+        PutUdateToken();
+        setUser(null); 
+        window.location.reload(); 
+    };
+
     return(
     <div>
     <header className="p-3 mb-3 border-bottom"> 
@@ -33,15 +41,13 @@ const Header = () => {
                             <Link to="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://raw.githubusercontent.com/renatossanches/front-end-GerenciaRH/refs/heads/main/public/userdefault.webp" alt="mdo" width="32" height="32" className="rounded-circle" />                  
                                 {user ? <p>{user.name}</p> : <p></p>}    
+                            </Link>
 
-                                </Link>
                             <ul className="dropdown-menu text-small" >
                                 <Link to="" className="dropdown-item">Settings</Link> 
                                 <Link to="/profile" className="dropdown-item">Profile</Link> 
                                 <Link to="/" className="dropdown-divider"></Link>
-                                <Link to="/home" 
-                                
-                                onClick={() => {localStorage.removeItem('authToken'); setUser(null); window.location.reload();}} className="dropdown-item">Sign out</Link>   
+                                <Link to="/home" onClick={handleLogout} className="dropdown-item">Sign out</Link>   
                             </ul> 
                     </div> 
             </div> 
