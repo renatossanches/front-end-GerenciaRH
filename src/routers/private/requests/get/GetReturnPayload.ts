@@ -17,7 +17,6 @@ export function GetReturnPayload() {
         return response.json();
     })
     .catch((error) => {
-        console.error("Erro no servidor: ", error.message);
-        alert("Erro no servidor: " + error.message);
+        console.error("Erro no servidor: ", error.message);    
         });    
 }

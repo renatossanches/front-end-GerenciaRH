@@ -16,7 +16,8 @@ export function PutUpdateUser(data: any) {
                     throw new AppError(error);
                 });
             }
-            return alert("Usuário atualizado com sucesso!");
+            alert("Usuário atualizado com sucesso!");
+            return response.status;
         })
         .catch((error) => {
             console.error("Erro no servidor: ", error.message);
