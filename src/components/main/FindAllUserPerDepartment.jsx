@@ -1,10 +1,11 @@
 import { GetUsersPerDepartment } from "../../routers/private/requests/get/GetUsersPerDepartment";
 import { useUser } from "../../contexts/UserContextGlobal";
 import { useEffect , useState } from "react";
+import { DeleteUserByNickname } from "../../routers/private/requests/delete/DeleteUserByNickname";
 
 export function FindAllUserPerDepartment() {
     
-    const { user, getUser } =  useUser(); 
+    const { user } =  useUser(); 
     const [users, setUsers] = useState([]);
     useEffect(() => {
 
@@ -16,9 +17,21 @@ export function FindAllUserPerDepartment() {
         fetchUsers();
     }, [user]);
     
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(users)
+          await DeleteUserByNickname(e.target.value);
+          window.location.reload();  
+      } catch (error) {
+          console.error("Erro na deleção:", error);
+      }
+      
+    }
+
     return (
         <div>
-            <table class="table table-dark table-hover">
+            <table className="table table-dark table-hover">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -36,6 +49,7 @@ export function FindAllUserPerDepartment() {
                             <td>{u.email}</td>
                             <td>{u.cargo}</td>
                             <td>{u.role}</td>
+                            <td><button type="button" className="" onClick={handleSubmit} value={u.nickname}> &otimes; </button></td>
                         </tr>
                     ))}
                 </tbody>

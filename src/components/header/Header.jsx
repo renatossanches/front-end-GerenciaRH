@@ -1,5 +1,5 @@
 import { useUser } from "../../contexts/UserContextGlobal";
-import { PutUdateToken } from "../../routers/private/requests/put/PutUpdateToken";
+import { PutUpdateToken } from "../../routers/private/requests/put/PutUpdateToken";
 import CreateDepartment from "../FormCreateDepartment";
 import CreateEnterprise from "../FormCreateEnterprise";
 import CreateUser from "../FormCreateUser";
@@ -11,7 +11,7 @@ const Header = () => {
     const user = getUser();
 
     const handleLogout = () => {
-        PutUdateToken();
+        PutUpdateToken();
         setUser(null); 
         window.location.reload(); 
     };

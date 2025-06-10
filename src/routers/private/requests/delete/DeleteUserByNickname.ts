@@ -1,9 +1,9 @@
 import fetchWithAuth from "../../../../hooks/DefaultFetchWithAuth";
 import { AppError } from "../../../exceptions/AppError";
 
-export function PutUpdateToken() {
-    return fetchWithAuth(`/tokens`, {
-        method: "PUT",
+export function DeleteUserByNickname(nickname: string) {
+    return fetchWithAuth(`/user/${nickname}`, {
+        method: "DELETE",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
@@ -15,8 +15,7 @@ export function PutUpdateToken() {
                     throw new AppError(error);
                 });
             }
-            localStorage.removeItem('authToken')
-            return alert("Usuário deslogado com sucesso");
+            return alert("Usuário deletado com sucesso!")
         })
         .catch((error) => {
             console.error("Erro no servidor: ", error.message);
