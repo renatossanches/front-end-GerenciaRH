@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { PostCreateUser } from "../routers/private/requests/post/PostCreateUser";
-
+import { GetFindAllDepartments } from "../routers/private/requests/get/GetFindAllDepartments";
+import { useEffect } from "react";
 function CreateUser() {
-
     const [name, setName] = useState('');
     const [contractDate, setContractDate] = useState('');
     const [nickname, setNickname] = useState('');
@@ -13,6 +13,16 @@ function CreateUser() {
     const [cargo, setCargo] = useState('');
     const [departmentName, setDepartmentName] = useState('');
     const [role, setRole] = useState('');
+    const [departments, setDepartments] = useState([]);
+
+    useEffect(() => {
+      const fetchDepartments = async () => {
+        const data = await GetFindAllDepartments();
+        setDepartments(data);
+      };
+    
+      fetchDepartments();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -80,12 +90,24 @@ function CreateUser() {
                     <input type="text" className="form-control" id="cargo" onChange={(e) => setCargo(e.target.value)}/>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="departmentName" className="col-form-label">Department Name:</label>
-                    <input type="text" className="form-control" id="departmentName" onChange={(e) => setDepartmentName(e.target.value)}/>
+                  <label htmlFor="departmentName" className="col-form-label">Department Name:</label>
+                  <select name="departmentName"  onChange={(e) => setDepartmentName(e.target.value)}>
+                    {departments.map(dept => (
+                      <option key={dept.id} value={dept.id}>
+                        {dept.nome}
+                      </option>
+                    ))}
+                  </select>
+                 
                   </div>
                   <div className="form-group">
                     <label htmlFor="role" className="col-form-label">Role:</label>
-                    <input type="text" className="form-control" id="role" onChange={(e) => setRole(e.target.value)}/>
+                    <select name="role" onChange={(e) => setRole(e.target.value)}>
+                      <option key="MASTER" value="MASTER">MASTER</option>
+                      <option key="ADMIN" value="ADMIN">ADMIN</option>
+                      <option key="COMUM" value="COMUM">COMUM</option>
+                  </select>
+                 
                   </div>
                 </form>
               </div>
