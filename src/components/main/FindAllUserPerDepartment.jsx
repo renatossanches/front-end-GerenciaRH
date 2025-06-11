@@ -7,6 +7,7 @@ export function FindAllUserPerDepartment() {
     
     const { user } =  useUser(); 
     const [users, setUsers] = useState([]);
+   
     useEffect(() => {
 
         const fetchUsers = async () => {
@@ -20,7 +21,7 @@ export function FindAllUserPerDepartment() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(users)
+          console.log(users)
           await DeleteUserByNickname(e.target.value);
           window.location.reload();  
       } catch (error) {
@@ -28,9 +29,11 @@ export function FindAllUserPerDepartment() {
       }
       
     }
+    if (user.departamento == null) return null;
 
     return (
         <div>
+        
             <table className="table table-dark table-hover">
                 <thead>
                     <tr>
@@ -57,3 +60,4 @@ export function FindAllUserPerDepartment() {
         </div>
     );
 }
+
